@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main_ll"
+    tools:context=".ui.ProductInfoFragment">
+
+    <LinearLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1D56FF"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"
+            android:src="@drawable/icon_arrow_back" />
+
+        <TextView
+            android:id="@+id/product_info_title_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="right|top"
+            android:src="@drawable/star_off" />
+
+        <ImageView
+            android:id="@+id/product_info_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/product_info_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:lineSpacingMultiplier="2"
+        android:text="iPhone 13 Pro Max 256Gb "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="16dp" />
+
+    <TextView
+        android:id="@+id/product_info_detail_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/montserrat"
+        android:lineSpacingMultiplier="2"
+        android:layout_weight="1"
+        android:text="iPhone 13 Pro Max 256Gb "
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:textSize="18sp"
+            android:id="@+id/product_info_price"
+            android:textColor="@color/black"
+            android:gravity="left|center"
+            android:text="Price :" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/add_card_button_bg">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:text="Add to Cart"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </FrameLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

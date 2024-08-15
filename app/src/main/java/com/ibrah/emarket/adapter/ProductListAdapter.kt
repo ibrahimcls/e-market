@@ -15,7 +15,7 @@ import com.ibrah.emarket.R
 import com.ibrah.emarket.di.local_source.DaggerLocalSourceComponent
 import com.ibrah.emarket.di.local_source.LocalSourceComponent
 import com.ibrah.emarket.di.local_source.LocalSourceModule
-import com.ibrah.emarket.model.BasketItem
+import com.ibrah.emarket.model.Filter
 import com.ibrah.emarket.model.Product
 import com.ibrah.emarket.repository.BasketItemRepository
 import com.ibrah.emarket.service.BasketItemLocalSource
@@ -25,7 +25,8 @@ import com.ibrah.emarket.viewmodel.ProductViewModel
 
 class ProductListAdapter(
     private var productViewModel: ProductViewModel,
-    private var productList: List<Product>
+    private var productList: List<Product>,
+    private var filter: Filter?
 ) :
     RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
         lateinit var basketItemRepository :BasketItemRepository
@@ -91,8 +92,38 @@ class ProductListAdapter(
         return productList.size
     }
 
-    fun updateProducts(newProductList: List<Product>) {
-        productList = newProductList
+    
+
+    fun applyFilterAndUpdate(newProductList: List<Product>, filter: Filter?) {
+        var filteredList = newProductList
+
+        if (!filter?.selectedBrands.isNullOrEmpty()) {
+            filteredList = filteredList.filter { product ->
+                filter?.selectedBrands!!.contains(product.brand)
+            }
+        }
+
+        if (!filter?.selectedModels.isNullOrEmpty()) {
+            filteredList = filteredList.filter { product ->
+                filter?.selectedModels!!.contains(product.model)
+            }
+        }
+
+        when (filter?.sortOption) {
+            "Old to new" -> {
+                filteredList = filteredList.sortedBy { it.createdAt }
+            }
+            "New to old" -> {
+                filteredList = filteredList.sortedByDescending { it.createdAt }
+            }
+            "Price high to low" -> {
+                filteredList = filteredList.sortedByDescending { it.price.toDouble() }
+            }
+            "Price low to high" -> {
+                filteredList = filteredList.sortedBy { it.price.toDouble() }
+            }
+        }
+        productList = filteredList
         notifyDataSetChanged()
     }
 

@@ -12,9 +12,9 @@ import com.ibrah.emarket.viewmodel.ProductViewModel
 import com.ibrah.emarket.adapter.ProductListAdapter
 import com.ibrah.emarket.databinding.FragmentProductListBinding
 import com.ibrah.emarket.di.product_repository.ProductRepositoryComponent
-import com.ibrah.emarket.di.basket_item_repository.BasketItemRepositoryModule
 import com.ibrah.emarket.di.product_repository.DaggerProductRepositoryComponent
 import com.ibrah.emarket.di.product_repository.ProductRepositoryModule
+import com.ibrah.emarket.model.Filter
 
 
 @Suppress("UNREACHABLE_CODE")
@@ -25,6 +25,8 @@ class ProductListFragment : Fragment() {
 
     private lateinit var adapter: ProductListAdapter
     private lateinit var productViewModel: ProductViewModel
+
+    private var filter : Filter? = null
 
 
     override fun onCreateView(
@@ -44,12 +46,12 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ProductListAdapter(productViewModel,arrayListOf())
+        adapter = ProductListAdapter(productViewModel,arrayListOf(),filter)
         binding.productListRv.layoutManager = GridLayoutManager(requireContext(),2)
         binding.productListRv.adapter = adapter
         productViewModel.fetchProducts()
         productViewModel.products.observe(viewLifecycleOwner) { products ->
-            adapter.updateProducts(products)
+            adapter.applyFilterAndUpdate(products,filter)
         }
         binding.filterFl.setOnClickListener{
             parentFragmentManager.beginTransaction()
@@ -58,8 +60,17 @@ class ProductListFragment : Fragment() {
                 .commit()
         }
         parentFragmentManager.setFragmentResultListener("filter_request_key", this) { _, bundle ->
-            val result = bundle.getString("filter_result")
-            Toast.makeText(context, "Selected Filter: $result", Toast.LENGTH_SHORT).show()
+            var sortOption = bundle.getString("sort_option")
+            var selectedBrands = bundle.getStringArrayList("selected_brands")
+            var selectedModels = bundle.getStringArrayList("selected_models")
+
+            filter = Filter(sortOption,selectedBrands,selectedModels)
+
+            Toast.makeText(
+                context,
+                "Sort By: $sortOption\nBrands: $selectedBrands\nModels: $selectedModels",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
 

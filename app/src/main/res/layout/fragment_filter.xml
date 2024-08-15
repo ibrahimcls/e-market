@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.FilterFragment">
 
     <LinearLayout
@@ -15,18 +15,19 @@
             android:id="@+id/closeButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:padding="3dp"
-            android:src="@drawable/icon_close_outline"
             android:layout_gravity="center"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp"
+            android:padding="3dp"
+            android:src="@drawable/icon_close_outline" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Filter"
-            android:gravity="center"
             android:fontFamily="@font/montserrat"
-            android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:gravity="center"
+            android:text="Filter"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,61 +41,168 @@
             android:layout_height="30dp"
             android:gravity="left|center"
             android:paddingLeft="16dp"
-            android:textSize="14sp"
+            android:text="Sort By"
             android:textColor="#B3333333"
-            android:text="Sort By"/>
+            android:textSize="14sp" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/sort_by_radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="left|center">
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Old to new"/>
+                android:layout_weight="1"
+                android:text="Old to new" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New to old"/>
+                android:layout_weight="1"
+                android:text="New to old" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Price high to low"/>
+                android:layout_weight="1"
+                android:text="Price high to low" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Price low to high"/>
+                android:layout_weight="1"
+                android:text="Price low to high" />
 
         </RadioGroup>
 
         <View
-            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="16dp"
-            android:background="@color/black"/>
+            android:layout_marginVertical="4dp"
+            android:background="@color/black" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="left|center"
+            android:paddingStart="16dp"
+            android:text="Brand"
+            android:textColor="#B3333333"
+            android:textSize="14sp" />
+
+
+        <CheckBox
+            android:id="@+id/appleCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Honda" />
+
+        <CheckBox
+            android:id="@+id/samsungCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Samsung" />
+
+        <CheckBox
+            android:id="@+id/huaweiCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Huawei" />
+
+        <CheckBox
+            android:id="@+id/xiaomiCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Xiaomi" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
+            android:background="@color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="left|center"
+            android:paddingLeft="16dp"
+            android:text="Model"
+            android:textColor="#B3333333"
+            android:textSize="14sp" />
+
+
+        <CheckBox
+            android:id="@+id/model11CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="11" />
+
+        <CheckBox
+            android:id="@+id/model12ProCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="12 Pro" />
+
+        <CheckBox
+            android:id="@+id/model13CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="13" />
+
+        <CheckBox
+            android:id="@+id/model13ProMaxCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="13 Pro Max" />
+
+
+    </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:background="@drawable/filter_button"
-        android:layout_height="50dp">
+        android:background="@drawable/filter_button">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Primary"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
+            android:textSize="20sp" />
     </FrameLayout>
 </LinearLayout>

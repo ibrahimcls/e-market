@@ -6,15 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ibrah.emarket.R
-import com.ibrah.emarket.adapter.ProductListAdapter
 import com.ibrah.emarket.adapter.StarredProductListAdapter
-import com.ibrah.emarket.databinding.FragmentProductListBinding
 import com.ibrah.emarket.databinding.FragmentStarBinding
-import com.ibrah.emarket.di.product_repository.DaggerProductRepositoryComponent
 import com.ibrah.emarket.di.product_repository.ProductRepositoryComponent
+import com.ibrah.emarket.di.basket_item_repository.BasketItemRepositoryModule
+import com.ibrah.emarket.di.product_repository.DaggerProductRepositoryComponent
 import com.ibrah.emarket.di.product_repository.ProductRepositoryModule
-import com.ibrah.emarket.viewmodel.ProductViewModel
+import com.ibrah.emarket.model.Product
 import com.ibrah.emarket.viewmodel.StarredProductViewModel
 
 class StarFragment : Fragment() {

@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ibrah.emarket.viewmodel.ProductViewModel
 import com.ibrah.emarket.adapter.ProductListAdapter
 import com.ibrah.emarket.databinding.FragmentProductListBinding
-import com.ibrah.emarket.di.product_repository.DaggerProductRepositoryComponent
 import com.ibrah.emarket.di.product_repository.ProductRepositoryComponent
+import com.ibrah.emarket.di.basket_item_repository.BasketItemRepositoryModule
+import com.ibrah.emarket.di.product_repository.DaggerProductRepositoryComponent
 import com.ibrah.emarket.di.product_repository.ProductRepositoryModule
 
 
@@ -30,7 +31,7 @@ class ProductListFragment : Fragment() {
     ): View {
         _binding = FragmentProductListBinding.inflate(inflater, container, false)
 
-        val productRepCom : ProductRepositoryComponent=DaggerProductRepositoryComponent.builder()
+        val productRepCom : ProductRepositoryComponent = DaggerProductRepositoryComponent.builder()
             .productRepositoryModule(ProductRepositoryModule(requireContext()))
             .build()
         productViewModel = ProductViewModel(productRepCom.provideProductRepository())

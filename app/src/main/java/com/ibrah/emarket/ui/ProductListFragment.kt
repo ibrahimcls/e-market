@@ -1,6 +1,8 @@
 package com.ibrah.emarket.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +61,18 @@ class ProductListFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+        binding.searchEt.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                adapter.search(p0.toString())
+            }
+        })
         parentFragmentManager.setFragmentResultListener("filter_request_key", this) { _, bundle ->
             var sortOption = bundle.getString("sort_option")
             var selectedBrands = bundle.getStringArrayList("selected_brands")

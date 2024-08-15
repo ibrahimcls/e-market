@@ -21,15 +21,15 @@ import com.ibrah.emarket.repository.BasketItemRepository
 import com.ibrah.emarket.service.BasketItemLocalSource
 import com.ibrah.emarket.ui.ProductInfoFragment
 import com.ibrah.emarket.viewmodel.ProductViewModel
-
-
 class ProductListAdapter(
     private var productViewModel: ProductViewModel,
-    private var productList: List<Product>,
+    private var originalProductList: List<Product>,
     private var filter: Filter?
-) :
-    RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
-        lateinit var basketItemRepository :BasketItemRepository
+) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
+
+    private var productList: List<Product> = originalProductList
+    private var filteredProductList: List<Product> = originalProductList
+    lateinit var basketItemRepository: BasketItemRepository
 
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productNameTextView: TextView = itemView.findViewById(R.id.product_name_tv)
@@ -37,7 +37,6 @@ class ProductListAdapter(
         val image: ImageView = itemView.findViewById(R.id.product_iv)
         val productStarIv: ImageView = itemView.findViewById(R.id.product_star_iv)
         val addCartBtn: FrameLayout = itemView.findViewById(R.id.add_cart_button)
-
 
         fun bind(product: Product) {
             productNameTextView.text = product.name
@@ -66,8 +65,8 @@ class ProductListAdapter(
                     productViewModel.productRepository.saveProduct(product)
                 }
             }
-            addCartBtn.setOnClickListener{
-                basketItemRepository.addBasketItem(product,1)
+            addCartBtn.setOnClickListener {
+                basketItemRepository.addBasketItem(product, 1)
             }
         }
     }
@@ -84,47 +83,50 @@ class ProductListAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val currentItem = productList[position]
+        val currentItem = filteredProductList[position]
         holder.bind(currentItem)
     }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return filteredProductList.size
     }
 
-    
-
     fun applyFilterAndUpdate(newProductList: List<Product>, filter: Filter?) {
-        var filteredList = newProductList
+        originalProductList = newProductList
+        filteredProductList = originalProductList
 
         if (!filter?.selectedBrands.isNullOrEmpty()) {
-            filteredList = filteredList.filter { product ->
+            filteredProductList = filteredProductList.filter { product ->
                 filter?.selectedBrands!!.contains(product.brand)
             }
         }
 
         if (!filter?.selectedModels.isNullOrEmpty()) {
-            filteredList = filteredList.filter { product ->
+            filteredProductList = filteredProductList.filter { product ->
                 filter?.selectedModels!!.contains(product.model)
             }
         }
 
         when (filter?.sortOption) {
             "Old to new" -> {
-                filteredList = filteredList.sortedBy { it.createdAt }
+                filteredProductList = filteredProductList.sortedBy { it.createdAt }
             }
             "New to old" -> {
-                filteredList = filteredList.sortedByDescending { it.createdAt }
+                filteredProductList = filteredProductList.sortedByDescending { it.createdAt }
             }
             "Price high to low" -> {
-                filteredList = filteredList.sortedByDescending { it.price.toDouble() }
+                filteredProductList = filteredProductList.sortedByDescending { it.price.toDouble() }
             }
             "Price low to high" -> {
-                filteredList = filteredList.sortedBy { it.price.toDouble() }
+                filteredProductList = filteredProductList.sortedBy { it.price.toDouble() }
             }
         }
-        productList = filteredList
+
         notifyDataSetChanged()
     }
 
+    fun search(query: String) {
+        filteredProductList = originalProductList.filter { it.name.contains(query, ignoreCase = true) }
+        notifyDataSetChanged()
+    }
 }

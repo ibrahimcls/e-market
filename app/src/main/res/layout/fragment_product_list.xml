@@ -29,7 +29,7 @@
     </FrameLayout>
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/search_et"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -42,7 +42,6 @@
         android:fontFamily="@font/montserrat"
         android:inputType="text"
         android:paddingStart="8dp"
-        android:text="Name"
         android:textColor="#ff626b8b"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +59,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/search_et" />
 
     <FrameLayout
         android:id="@+id/filter_fl"
@@ -70,7 +69,7 @@
         android:layout_marginEnd="16dp"
         android:background="#ffc4c4c4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText">
+        app:layout_constraintTop_toBottomOf="@+id/search_et">
 
         <TextView
             android:id="@+id/textView3"

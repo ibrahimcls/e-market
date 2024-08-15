@@ -11,11 +11,17 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.ibrah.emarket.R
 import com.ibrah.emarket.databinding.FragmentProductInfoBinding
+import com.ibrah.emarket.di.local_source.DaggerLocalSourceComponent
+import com.ibrah.emarket.di.local_source.LocalSourceComponent
+import com.ibrah.emarket.di.local_source.LocalSourceModule
 import com.ibrah.emarket.model.Product
+import com.ibrah.emarket.repository.BasketItemRepository
+import com.ibrah.emarket.service.BasketItemLocalSource
 
 class ProductInfoFragment(private val product: Product) : Fragment() {
     private var _binding: FragmentProductInfoBinding? = null
     private val binding get() = _binding
+    lateinit var basketItemRepository : BasketItemRepository
 
 
     @SuppressLint("SetTextI18n")
@@ -36,6 +42,11 @@ class ProductInfoFragment(private val product: Product) : Fragment() {
             insets
         }
 
+        val localSourceComponent: LocalSourceComponent = DaggerLocalSourceComponent.builder()
+            .localSourceModule(LocalSourceModule(requireContext()))
+            .build()
+        val basketItemLocalSource = BasketItemLocalSource(localSourceComponent.provideAppDatabase())
+        basketItemRepository = BasketItemRepository(basketItemLocalSource)
 
         binding?.productInfoNameTv?.text = product.name
         binding?.productInfoDetailTv?.text = product.description
@@ -51,6 +62,9 @@ class ProductInfoFragment(private val product: Product) : Fragment() {
                 .error(R.drawable.placeholder)
                 .into(it)
 
+        }
+        binding?.addCartButton?.setOnClickListener {
+            basketItemRepository.addBasketItem(product,1)
         }
     }
 

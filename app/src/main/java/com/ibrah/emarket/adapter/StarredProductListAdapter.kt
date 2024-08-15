@@ -14,11 +14,12 @@ import com.ibrah.emarket.R
 import com.ibrah.emarket.adapter.StarredProductListAdapter.StarredProductViewHolder
 import com.ibrah.emarket.model.Product
 import com.ibrah.emarket.ui.ProductInfoFragment
-import com.ibrah.emarket.viewmodel.ProductViewModel
+import com.ibrah.emarket.viewmodel.StarredProductViewModel
 
 
 class StarredProductListAdapter(
-    private var productList: List<Product>
+    private var productViewModel: StarredProductViewModel,
+    private var productList: ArrayList<Product>
 ) :
     RecyclerView.Adapter<StarredProductViewHolder>() {
 
@@ -26,6 +27,7 @@ class StarredProductListAdapter(
         val productNameTextView: TextView = itemView.findViewById(R.id.product_name_tv)
         val amountTextView: TextView = itemView.findViewById(R.id.product_amount_tv)
         val image: ImageView = itemView.findViewById(R.id.product_iv)
+        val productStarIv: ImageView = itemView.findViewById(R.id.product_star_iv)
 
 
         fun bind(product: Product) {
@@ -42,6 +44,12 @@ class StarredProductListAdapter(
                     .replace(R.id.fragment_container, productInfoFragment)
                     .addToBackStack(null)
                     .commit()
+            }
+            productStarIv.setImageResource(R.drawable.star_on)
+            productStarIv.setOnClickListener {
+                productList.remove(product)
+                productViewModel.deleteStarredProduct(product)
+                notifyDataSetChanged()
             }
 
         }
@@ -64,7 +72,8 @@ class StarredProductListAdapter(
     }
 
     fun updateProducts(products: List<Product>) {
-        productList = products
+        productList.clear()
+        productList.addAll(products)
         notifyDataSetChanged()
     }
 

@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ibrah.emarket.adapter.StarredProductListAdapter
 import com.ibrah.emarket.databinding.FragmentStarBinding
 import com.ibrah.emarket.di.product_repository.ProductRepositoryComponent
-import com.ibrah.emarket.di.basket_item_repository.BasketItemRepositoryModule
 import com.ibrah.emarket.di.product_repository.DaggerProductRepositoryComponent
 import com.ibrah.emarket.di.product_repository.ProductRepositoryModule
-import com.ibrah.emarket.model.Product
 import com.ibrah.emarket.viewmodel.StarredProductViewModel
 
 class StarFragment : Fragment() {
@@ -40,7 +38,7 @@ class StarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = StarredProductListAdapter(arrayListOf())
+        adapter = StarredProductListAdapter(productViewModel,arrayListOf())
         binding.productListRv.layoutManager = GridLayoutManager(requireContext(),2)
         binding.productListRv.adapter = adapter
         productViewModel.getStarredProducts()

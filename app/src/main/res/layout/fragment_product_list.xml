@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
     <FrameLayout
-        android:id="@+id/frameLayout2"
+        android:id="@+id/filter_fl"
         android:layout_width="158dp"
         android:layout_height="36dp"
         android:layout_marginTop="12dp"
@@ -91,5 +91,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/filter_fl" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,11 +40,7 @@ class BasketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main_bcl)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
         adapter = BasketAdapter(basketViewModel,arrayListOf())
         binding.basketRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.basketRecyclerView.adapter = adapter

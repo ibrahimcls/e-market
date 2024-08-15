@@ -23,4 +23,8 @@ class StarredProductViewModel @Inject constructor(val productRepository: Product
     fun getStarredProducts() {
         _products.postValue(productRepository.getProductsFromLocal())
     }
+
+    fun deleteStarredProduct(product:Product){
+        productRepository.deleteProduct(product)
+    }
 }

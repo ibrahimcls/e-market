@@ -14,7 +14,8 @@ import com.ibrah.emarket.viewmodel.BasketViewModel
 
 class BasketAdapter(
     private var basketViewModel: BasketViewModel,
-    private var basketItems: ArrayList<BasketItem>
+    private var basketItems: ArrayList<BasketItem>,
+    private val onItemUpdated: (BasketItem) -> Unit
 ) :
     RecyclerView.Adapter<BasketAdapter.ProductViewHolder>() {
 
@@ -37,6 +38,7 @@ class BasketAdapter(
                 basketItems.find { it.id == basketItem.id }?.let {
                     it.count = basketItem.count + 1
                 }
+                onItemUpdated(basketItem)
                 notifyDataSetChanged()
             }
 
@@ -49,6 +51,7 @@ class BasketAdapter(
                     basketItems.remove(basketItem)
                 }
                 basketViewModel.basketRepository.addBasketItem(basketItem.product, -1)
+                onItemUpdated(basketItem)
                 notifyDataSetChanged()
             }
         }
@@ -74,6 +77,10 @@ class BasketAdapter(
         basketItems.clear()
         basketItems.addAll(basketItemList)
         notifyDataSetChanged()
+    }
+
+    fun getTotalPrice(): Int {
+        return basketItems.sumOf { it.count*it.product.price.toFloat().toInt() }
     }
 
 }

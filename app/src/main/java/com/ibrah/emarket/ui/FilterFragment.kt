@@ -19,7 +19,7 @@ class FilterFragment : Fragment() {
     private lateinit var submitButton: FrameLayout
 
     private lateinit var hondaCheckBox: CheckBox
-    private lateinit var samsungCheckBox: CheckBox
+    private lateinit var fordCheckBox: CheckBox
     private lateinit var huaweiCheckBox: CheckBox
     private lateinit var xiaomiCheckBox: CheckBox
 
@@ -41,7 +41,7 @@ class FilterFragment : Fragment() {
         submitButton = view.findViewById(R.id.submitButton)
 
         hondaCheckBox = view.findViewById(R.id.appleCheckBox)
-        samsungCheckBox = view.findViewById(R.id.samsungCheckBox)
+        fordCheckBox = view.findViewById(R.id.fordCheckBox)
         huaweiCheckBox = view.findViewById(R.id.huaweiCheckBox)
         xiaomiCheckBox = view.findViewById(R.id.xiaomiCheckBox)
 
@@ -62,7 +62,7 @@ class FilterFragment : Fragment() {
 
             val selectedBrands = mutableListOf<String>()
             if (hondaCheckBox.isChecked) selectedBrands.add("Honda")
-            if (samsungCheckBox.isChecked) selectedBrands.add("Samsung")
+            if (fordCheckBox.isChecked) selectedBrands.add("Ford")
             if (huaweiCheckBox.isChecked) selectedBrands.add("Huawei")
             if (xiaomiCheckBox.isChecked) selectedBrands.add("Xiaomi")
 
